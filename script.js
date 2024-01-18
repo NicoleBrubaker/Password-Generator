@@ -139,7 +139,6 @@ var generatePassword = function () {
   // empty array to gather concatenations from if statement below
   var userCharacterChoices = [];
 
-
   // if statements to determine which character types user selected, and concatenating together
   if (useLowerCase === true) {
     userCharacterChoices = userCharacterChoices.concat(lowerCaseAlphabet);
@@ -153,6 +152,12 @@ var generatePassword = function () {
   if (useSpecialChar === true) {
     userCharacterChoices = userCharacterChoices.concat(specialCharacters);
   }
+
+  if (userCharacterChoices.length === 0) {
+    alert("Must select minimum of one character type");
+    generatePassword();
+    return;
+  }  
 
   // variable to store full password
   var completePassword = "";
