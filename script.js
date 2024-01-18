@@ -1,14 +1,14 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-//generate password function - gathers all password preferences, creates one large arrays based on selections, cuts it down and randomizes based on length defined by user
+// generate password function - gathers all password preferences, creates one large arrays based on selections, cuts it down and randomizes based on length defined by user
 var generatePassword = function () {
   var startPasswordCreation = confirm("Lets define your password!");
   if (!startPasswordCreation) {
     return;
   }
 
-  //asking password length
+  // asking password length
   var userPasswordLength = prompt(
     "Password length: \n*must be 8-128 characters*"
   );
@@ -16,25 +16,28 @@ var generatePassword = function () {
     return;
   }
 
+  // validating password length
   if (userPasswordLength < 8 || userPasswordLength > 128) {
-    confirm("Password must be between 8-128 characters");
-  } 
+    alert("Password must be between 8-128 characters");
+    generatePassword();
+    return;
+  }
 
-  //asking for lowercase letters
+  // asking for lowercase letters
   var useLowerCase = confirm("Use lowercase letters?");
 
-  //asking for uppercase letters
+  // asking for uppercase letters
   var useUpperCase = confirm("Use uppercase letters?");
 
-  //asking for numeric values
+  // asking for numeric values
   var useNumValues = confirm("Use numeric values?");
 
-  //asking for special characters
+  // asking for special characters
   var useSpecialChar = confirm("Use special characters?");
 
-  //all arrays with all possible characters
+  // all arrays with all possible characters
 
-  //lowercase alphabet array
+  // lowercase alphabet array
   lowerCaseAlphabet = [
     "a",
     "b",
@@ -64,7 +67,7 @@ var generatePassword = function () {
     "z",
   ];
 
-  //uppercase alphabet array
+  // uppercase alphabet array
   upperCaseAlphabet = [
     "A",
     "B",
@@ -94,10 +97,10 @@ var generatePassword = function () {
     "Z",
   ];
 
-  //number options array
+  // number options array
   numericValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  //special character options array
+  // special character options array
   specialCharacters = [
     "!",
     '"',
@@ -133,8 +136,11 @@ var generatePassword = function () {
     "~",
   ];
 
+  // empty array to gather concatenations from if statement below
   var userCharacterChoices = [];
 
+
+  // if statements to determine which character types user selected, and concatenating together
   if (useLowerCase === true) {
     userCharacterChoices = userCharacterChoices.concat(lowerCaseAlphabet);
   }
@@ -148,10 +154,10 @@ var generatePassword = function () {
     userCharacterChoices = userCharacterChoices.concat(specialCharacters);
   }
 
-  //empty variable to use for below for loop
+  // variable to store full password
   var completePassword = "";
 
-  //loops through the full character array as many times as determined by userPasswordLength, and concatenates determined values to give the completePassword
+  // loops through the full character array as many times as determined by userPasswordLength, and concatenates determined values to give the completePassword
   for (var i = 1; i <= userPasswordLength; i++) {
     var randomCharacter = randomValue(userCharacterChoices);
     completePassword = completePassword.concat(randomCharacter);
@@ -160,7 +166,7 @@ var generatePassword = function () {
   return completePassword;
 };
 
-//determines a random value from a provided array
+// determines a random value from a provided array
 var randomValue = function (characterArray) {
   var getRandomValue = Math.floor(Math.random() * characterArray.length);
   return characterArray[getRandomValue];
