@@ -15,23 +15,22 @@ var generatePassword = function () {
   if (!userPasswordLength) {
     return;
   }
-  console.log(userPasswordLength);
+
+  if (userPasswordLength < 8 || userPasswordLength > 128) {
+    confirm("Password must be between 8-128 characters");
+  } 
 
   //asking for lowercase letters
   var useLowerCase = confirm("Use lowercase letters?");
-  console.log(useLowerCase);
 
   //asking for uppercase letters
   var useUpperCase = confirm("Use uppercase letters?");
-  console.log(useUpperCase);
 
   //asking for numeric values
   var useNumValues = confirm("Use numeric values?");
-  console.log(useNumValues);
 
   //asking for special characters
   var useSpecialChar = confirm("Use special characters?");
-  console.log(useSpecialChar);
 
   //all arrays with all possible characters
 
@@ -148,9 +147,8 @@ var generatePassword = function () {
   if (useSpecialChar === true) {
     userCharacterChoices = userCharacterChoices.concat(specialCharacters);
   }
-  console.log(userCharacterChoices);
 
-  //empty variable to use for below function
+  //empty variable to use for below for loop
   var completePassword = "";
 
   //loops through the full character array as many times as determined by userPasswordLength, and concatenates determined values to give the completePassword
